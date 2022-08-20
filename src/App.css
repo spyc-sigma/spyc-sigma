@@ -12,14 +12,14 @@
 .logo .logo-light {
   width: 113px;
   height: 46px;
-  z-index: 1;
+  z-index: 11;
   position: absolute;
 }
 
 .logo .logo-main {
   width: 109px;
   height: 41px;
-  z-index: 2;
+  z-index: 12;
   position: absolute;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .header {
-  z-index: 1;
+  z-index: 11;
   background: transparent;
 }
 
@@ -46,4 +46,17 @@
 
 .parallax-container {
   z-index: 0;
+}
+
+.banner-image {
+  z-index: 1;
+}
+
+.banner-cover {
+  z-index: 2;
+}
+
+.page-title-flexbox,
+.page-title-flexbox * {
+  z-index: 5;
 }

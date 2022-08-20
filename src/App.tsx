@@ -53,7 +53,13 @@ const App: React.FC = () => (
           offset={0}
           speed={2.5}
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#1f1e33', color: "white" }}>
-          <p>Scroll down</p>
+          <div className="page-title-container" style={{ width: "100%", height: "100%", position: "relative" }}>
+            <img className="banner-image" src="classroombg.jpeg" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute" }} alt=""></img>
+            <div className="banner-cover" style={{ width: "100%", height: "100%", backgroundColor: "rgb(0,0,0)", position: "absolute", opacity: 0.4 }}></div>
+            <div className="page-title-flexbox" style={{ width: "100%", height: "100%", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <img style={{ width: "50%", height: "50%", objectFit: "scale-down" }} src="logo_large_text_light.svg" alt="Sigma"></img>
+            </div>
+          </div>
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#ff6d6d' }} />
