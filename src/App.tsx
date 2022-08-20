@@ -1,8 +1,11 @@
-import { Breadcrumb, Checkbox, Col, DatePicker, Image, Layout, Menu, MenuProps, Row, Space } from 'antd';
+import { Breadcrumb, Checkbox, Col, DatePicker, Image, Layout, Menu, MenuProps, Row, Space, Typography } from 'antd';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import React from 'react';
+// @ts-ignore
+import Fade from 'react-reveal/Fade';
 import "./App.css"
 
+const { Title, Paragraph, Text, Link } = Typography;
 const { Header, Content, Footer } = Layout;
 
 const items: MenuProps['items'] = [
@@ -56,10 +59,18 @@ const App: React.FC = () => (
           <div className="page-title-container" style={{ width: "100%", height: "100%", position: "relative" }}>
             <img className="banner-image" src="classroombg.jpeg" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute" }} alt=""></img>
             <div className="banner-cover" style={{ width: "100%", height: "100%", backgroundColor: "rgb(0,0,0)", position: "absolute", opacity: 0.4 }}></div>
-            <div className="page-title-flexbox" style={{ width: "100%", height: "100%", position: "absolute", display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <img style={{ width: "50%", height: "50%", objectFit: "scale-down" }} src="logo_large_text_light.svg" alt="Sigma"></img>
-            </div>
           </div>
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={0}
+          speed={1}
+          className="page-title-flexbox"
+          style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}
+        >
+          <Fade bottom={true}>
+            <img style={{ maxWidth: "50%", maxHeight: "50%", objectFit: "scale-down", marginBottom: "12px" }} src="logo_large_text_light.svg" alt="Sigma"></img>
+            <Title level={3} style={{ color: "white", textShadow: "1px 1px 4px #1f1e33" }}>沙田培英中學 第28屆學生會 名單選舉候選人</Title>
+          </Fade>
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#ff6d6d' }} />
