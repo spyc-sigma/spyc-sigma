@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="199" height="234" fill="none" viewBox="0 0 199 234">
+  <mask id="a" width="194" height="233" x="6" y="1" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+    <path fill="#D9D9D9" stroke="#fff" stroke-linejoin="round" stroke-width="18" d="M15.316 10 91.64 117.157 15.3 224.314h174.897V10H15.316Z"/>
+  </mask>
+  <g mask="url(#a)">
+    <path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="18" d="M2.697 10h170.19v18.91H2.697V10Zm0 195.404h170.19v18.91H2.697v-18.91Z"/>
+  </g>
+  <path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="18" d="m9 73.961 10.327-7.23 35.665 50.934-10.327 7.231L9 73.961Z"/>
+  <path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="18" d="m9 161.38 10.327 7.231 35.648-50.912-10.327-7.23L9 161.38Zm180.671 26.941-16.543 35.477-17.138-7.992 16.543-35.476 17.138 7.991Zm-.234-142.829L172.887 10l-17.138 7.992 16.55 35.491 17.138-7.991Z"/>
+  <mask id="b" width="117" height="234" x="6" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+    <path fill="#D9D9D9" stroke="#fff" stroke-linejoin="round" stroke-width="18" d="M90.944 117.157 15.304 10l34.668 18.91 63.033 88.247-63.033 88.247-34.669 18.91 75.64-107.157Z"/>
+  </mask>
+  <g mask="url(#b)">
+    <path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="18" d="M14.688 10.027 30.178-.819l82.603 117.969-15.49 10.846L14.688 10.027Z"/>
+    <path fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-width="18" d="m97.282 106.33 15.49 10.847-82.625 118-15.49-10.846L97.282 106.33Z"/>
+  </g>
+</svg>
