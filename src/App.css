@@ -61,6 +61,11 @@
   z-index: 5;
 }
 
+.intro-layer {
+  z-index: 0;
+  background-color: white;
+}
+
 .subtitle-space {
   justify-content: center;
   text-align: center;
@@ -69,4 +74,50 @@
 .subtitle-space > div > h3 {
   color: white;
   line-height: 0.6;
+}
+
+.dark-typography div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.menu-parent .ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: transparent;
+  font-weight: bolder;
+  color: #7ace93;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.menu-parent .ant-menu.ant-menu-dark .ant-menu-item-selected span {
+  border-bottom: 1px rgba(255, 255, 255, 0.85) solid;
+}
+
+.menu-parent .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
+  background-color: transparent;
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 880px) {
+  header.header {
+    position: relative;
+  }
+
+  header.header > div.header-row {
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    margin: 0 0 0 0 !important;
+  }
+
+  .header-row > .ant-col:last-child {
+    flex-grow: 1;
+    max-width: 100vw;
+  }
 }
