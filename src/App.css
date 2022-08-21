@@ -60,3 +60,13 @@
 .page-title-flexbox * {
   z-index: 5;
 }
+
+.subtitle-space {
+  justify-content: center;
+  text-align: center;
+}
+
+.subtitle-space > div > h3 {
+  color: white;
+  line-height: 0.6;
+}

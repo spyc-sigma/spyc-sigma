@@ -69,8 +69,10 @@ const App: React.FC = () => (
         >
           <Fade bottom={true}>
             <img style={{ maxWidth: "50%", maxHeight: "50%", objectFit: "scale-down", marginBottom: "12px" }} src="logo_large_text_light.svg" alt="Sigma"></img>
-            <Title level={3} style={{ color: "white", textShadow: "1px 1px 4px #1f1e33" }}>沙田培英中學 第28屆學生會 名單選舉候選人</Title>
-          </Fade>
+            <Space className="subtitle-space" wrap={true} style={{ color: "white", textShadow: "1px 1px 4px #1f1e33" }}>
+              <Title level={3} >沙田培英中學</Title> <Title level={3}>第28屆學生會</Title> <Title level={3}>名單選舉候選人</Title>
+            </Space>
+          </Fade> 
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={2} style={{ backgroundColor: '#ff6d6d' }} />
