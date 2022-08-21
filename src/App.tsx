@@ -1,11 +1,12 @@
-import { Col, Layout, Menu, MenuProps, Row, Space, Typography } from 'antd';
+import { Anchor, Avatar, Col, Divider, Layout, Menu, MenuProps, Row, Space, Typography } from 'antd';
+import { InstagramOutlined, MailOutlined } from '@ant-design/icons';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
 import React, { Ref, RefObject, useRef, useState } from 'react';
 // @ts-ignore
 import Fade from 'react-reveal/Fade';
 import "./App.css"
-const { Title, Paragraph } = Typography;
-const { Header, Content } = Layout;
+const { Title, Paragraph, Link } = Typography;
+const { Header, Content, Footer } = Layout;
 
 const items: MenuProps['items'] = [
   {
@@ -69,7 +70,7 @@ const App: React.FC = () => {
         </Row>
       </Header>
       <Content>
-        <Parallax ref={(ref as unknown as Ref<IParallax> | undefined) ?? undefined} className='parallax-container' pages={3} style={{ top: '0', left: '0', backgroundColor: "#1f1e33" }}>
+        <Parallax ref={(ref as unknown as Ref<IParallax> | undefined) ?? undefined} className='parallax-container' pages={7} style={{ top: '0', left: '0', backgroundColor: "#1f1e33" }}>
           <ParallaxLayer
             offset={0}
             speed={-0.2}
@@ -104,7 +105,72 @@ const App: React.FC = () => {
             </Typography>
           </ParallaxLayer>
 
-          <ParallaxLayer offset={2} speed={-0.5} style={{ backgroundColor: '#1f1e33' }}></ParallaxLayer>
+          <ParallaxLayer
+            offset={2}
+            speed={-0.2}
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#1f1e33', color: "white" }}>
+            <div className="page-title-container" style={{ width: "100%", height: "100%", position: "relative" }}>
+              <img className="banner-image" src="bg1.jpg" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute" }} alt=""></img>
+              <div className="banner-cover" style={{ width: "100%", height: "100%", backgroundColor: "rgb(0,0,0)", position: "absolute", opacity: 0.4 }}></div>
+            </div>
+          </ParallaxLayer>
+          <ParallaxLayer
+            offset={2}
+            speed={-0.4}
+            className="page-title-flexbox"
+            style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}
+          >
+            <Fade bottom={true}>
+              <Typography className='dark-typography'>
+                <Title>宗旨</Title>
+              </Typography>
+            </Fade>
+          </ParallaxLayer>
+
+          <ParallaxLayer offset={3} speed={0.02} style={{ backgroundColor: '#1f1e33', zIndex: 10 }}></ParallaxLayer>
+
+
+          <ParallaxLayer
+            offset={4}
+            speed={-0.2}
+            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#1f1e33', color: "white" }}>
+            <div className="page-title-container" style={{ width: "100%", height: "100%", position: "relative" }}>
+              <img className="banner-image" src="bg1.jpg" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute" }} alt=""></img>
+              <div className="banner-cover" style={{ width: "100%", height: "100%", backgroundColor: "rgb(0,0,0)", position: "absolute", opacity: 0.4 }}></div>
+            </div>
+          </ParallaxLayer>
+          <ParallaxLayer
+            offset={4}
+            speed={-0.4}
+            className="page-title-flexbox"
+            style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}
+          >
+            <Fade bottom={true}>
+              <Typography className='dark-typography'>
+                <Title>活動</Title>
+              </Typography>
+            </Fade>
+          </ParallaxLayer>
+
+          <ParallaxLayer offset={5} speed={0.02} style={{ backgroundColor: '#1f1e33', zIndex: 10 }}></ParallaxLayer>
+
+          <ParallaxLayer offset={6} speed={0.02} style={{ backgroundColor: "#1f1e33", zIndex: 10 }}>
+            <div className="footer-container" style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "center", height: "100%", zIndex: 11, paddingBottom: "20px", paddingLeft: "20px", paddingRight: "20px" }}>
+              <Row align="middle" gutter={16}>
+                <Col style={{ minWidth: "fit-content" }} flex="1 0 fit-content" span={3}><Avatar icon={<InstagramOutlined />}></Avatar></Col>
+                <Col style={{ minWidth: "fit-content" }} flex="1 0 fit-content" span={3}><Avatar icon={<MailOutlined />}></Avatar></Col>
+              </Row>
+              <Divider type="horizontal" style={{ borderColor: "rgba(255,255,255,0.8)" }}></Divider>
+              <Row align="middle">
+                <Col span={24}>
+                  <Typography className="dark-typography" style={{ textAlign: "center" }}>
+                    <Paragraph><Row align='middle' style={{ textAlign: "center", justifyContent: "center" }}><Col>如有任何意見或疑問&nbsp;</Col><Col>歡迎透過電郵、Instagram Direct或</Col><Col>&nbsp;<Link href="#">意見收集箱</Link>&nbsp;聯絡我們</Col></Row></Paragraph>
+                    <Title level={5}><Row align='middle' style={{ textAlign: "center", justifyContent: "center" }}><Col>如果您認同我們的理念, 請投</Col><Col><img className='inline-logo' src="logo_large_text_light.svg" alt="Sigma"></img></Col><Col>一票, </Col><Col>給予我們一個服務同學的機會。</Col></Row></Title>
+                  </Typography>
+                </Col>
+              </Row>
+            </div>
+          </ParallaxLayer>
 
           {/* <ParallaxLayer
           offset={1}
@@ -119,7 +185,8 @@ const App: React.FC = () => {
         </ParallaxLayer> */}
         </Parallax>
       </Content>
-    </Layout>
+
+    </Layout >
   )
 };
 
