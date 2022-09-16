@@ -88,14 +88,14 @@ h6 {
 
 .menu-parent .ant-menu.ant-menu-dark .ant-menu-item-selected {
   background-color: transparent;
-  font-weight: bolder;
+  /* font-weight: bolder;
   color: #7ace93;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); */
 }
 
-.menu-parent .ant-menu.ant-menu-dark .ant-menu-item-selected span {
+/* .menu-parent .ant-menu.ant-menu-dark .ant-menu-item-selected span {
   border-bottom: 1px rgba(255, 255, 255, 0.85) solid;
-}
+} */
 
 .menu-parent .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
   background-color: transparent;
@@ -135,4 +135,44 @@ h6 {
   height: 1.25em;
   object-fit: contain;
   margin: 0 0.4em;
+}
+/* 
+.carousel-space {
+  height: 100%;
+}
+
+.carousel, article > .ant-carousel {
+  height: 100% !important;
+} */
+
+.flexbox-sect {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+}
+
+.slider div:not(.text, .text *) {
+  height: 100%;
+}
+
+.official-photo {
+  width: 50%;
+  margin-right: 15px;
+}
+
+@media screen and (max-width: 800px) {
+  .official-photo {
+    width: 80%;
+  }
+}
+
+.light-text,
+.light-text .paragraph {
+  color: white !important;
+}
+
+.grow {
+  flex-grow: 1;
 }
