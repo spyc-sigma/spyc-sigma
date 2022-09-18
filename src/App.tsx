@@ -32,8 +32,8 @@ const items: MenuProps["items"] = [
     key: "tenet",
   },
   {
-    label: "關注重點",
-    key: "focus",
+    label: "服務",
+    key: "services",
   },
   {
     label: "活動",
@@ -51,20 +51,25 @@ const strongTitleStyle = { textShadow: "4px 4px 1px rgba(31,30,51,0.6)" };
 
 const sectionContainerStyles = {
   height: "100%",
+  maxWidth: "100%",
   display: "flex",
   flexDirection: "column" as const,
 };
+
+const nowrap = { whiteSpace: "nowrap" as const };
 
 const App: React.FC = () => {
   const [currentSection, setCurrentSection] = useState("");
   const ref = useRef<IParallax>();
 
   const logoOnClick = () => {
+    window.location.hash = "";
     setCurrentSection("");
     ref.current?.scrollTo(0);
   };
 
   const menuOnClick: MenuProps["onClick"] = (e) => {
+    window.location.hash = e.key;
     console.log("click ", e);
     setCurrentSection(e.key);
     const sectionIndex =
@@ -74,13 +79,35 @@ const App: React.FC = () => {
     ref.current?.scrollTo(sectionIndex);
   };
 
+  const onParallaxLoaded = () => {
+    document
+      .getElementsByClassName("parallax-container")[0]
+      .addEventListener("scroll", () => {
+        setTimeout(() => {
+          document
+            .getElementsByClassName("ant-menu-item-selected")[0]
+            ?.classList?.remove("ant-menu-item-selected");
+        }, 1000);
+      });
+
+    const key = window.location.hash;
+    const queryIndex = items.findIndex(
+      (i) => (i as { label: string; key: string }).key === key.slice(1)
+    );
+    if (queryIndex === -1) return (window.location.hash = "");
+    const sectionIndex = queryIndex + 1;
+    setTimeout(() => {
+      ref.current?.scrollTo(sectionIndex);
+    }, 1000);
+  };
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    style: { flexGrow: 1 },
+    style: { flexGrow: 1, minHeight: 0 },
     className: "slider",
   };
 
@@ -104,6 +131,24 @@ const App: React.FC = () => {
       icon: "heavy-dollar-sign_1f4b2.png",
       title: "爭取福利，提供店鋪優惠",
       text: "我們將走入店鋪，為同學儘量爭取各校外的福利，同時提供校內的便利服務",
+    },
+  ];
+
+  const events = [
+    {
+      image: "./basketball-field.jpg",
+      title: "師生球類比賽",
+      description: "包括: 籃球、足球、排球等",
+    },
+    {
+      image: "./camera-to-be-changed.jpg",
+      title: "校園攝影比賽",
+      description: "透過攝影發掘出校園另一面",
+    },
+    {
+      image: "./camera-to-be-changed.jpg",
+      title: "校園攝影比賽",
+      description: "透過攝影發掘出校園另一面",
     },
   ];
 
@@ -143,6 +188,7 @@ const App: React.FC = () => {
       </Header>
       <Content>
         <Parallax
+          onLoad={onParallaxLoaded}
           ref={(ref as unknown as Ref<IParallax> | undefined) ?? undefined}
           className="parallax-container"
           pages={7}
@@ -158,6 +204,7 @@ const App: React.FC = () => {
               backgroundColor: "#1f1e33",
               color: "white",
             }}
+            id="layer-1-back"
           >
             <div
               className="page-title-container"
@@ -196,6 +243,7 @@ const App: React.FC = () => {
               alignItems: "center",
               flexDirection: "column",
             }}
+            id="layer-1-front"
           >
             <Fade bottom={true}>
               <img
@@ -227,19 +275,21 @@ const App: React.FC = () => {
             offset={1}
             speed={0.02}
             style={{ backgroundColor: "#595959", zIndex: 10 }}
+            id="layer-2-back"
           ></ParallaxLayer>
 
           <ParallaxLayer
             offset={1}
             speed={0.5}
             style={{ zIndex: 11, padding: "60px" }}
+            id="layer-2-front"
           >
             <div className="dark-typography" style={sectionContainerStyles}>
               <Title style={strongTitleStyle}>組別名稱及徽號</Title>
               <Slider {...settings}>
                 <div className="flexbox-sect" style={{ flexGrow: 1 }}>
                   <DescriptionSectionAnimation1 className="text" />
-                  <div className="text" style={bodyTextStyle}>
+                  <div className="text bodytext">
                     <span style={strongTextStyle}>Sigma (Σ)</span>
                     這個符號在數學中被使用作求和符號,
                     常被用於數字序列的相加中。而我們希望發揮類似於「求和」的作用,
@@ -250,26 +300,11 @@ const App: React.FC = () => {
                 </div>
                 <div className="flexbox-sect" style={{ flexGrow: 1 }}>
                   <img
+                    id="logo-for-unity"
                     src="android-chrome-512x512.png"
                     alt="團結"
-                    style={{
-                      minWidth: `${Math.min(
-                        document.body?.offsetWidth ?? 200,
-                        200
-                      )}px`,
-                      maxWidth: "calc(100% - 20px)",
-                      maxHeight: "40vh",
-                      margin: "40px auto",
-                    }}
                   />
-                  <div className="text" style={bodyTextStyle}>
-                    <span style={strongTextStyle}>Sigma (Σ)</span>
-                    這個符號在數學中被使用作求和符號,
-                    常被用於數字序列的相加中。而我們希望發揮類似於「求和」的作用,
-                    作為學生之間連結的橋梁, 增強本校學生的
-                    <span style={strongTextStyle}>團結精神</span>
-                    ,發揮我們學生各方面的才能。
-                  </div>
+                  <div className="text bodytext">徽號簡介待完成</div>
                 </div>
               </Slider>
             </div>
@@ -285,6 +320,7 @@ const App: React.FC = () => {
               backgroundColor: "#1f1e33",
               color: "white",
             }}
+            id="layer-3-back"
           >
             <div
               className="page-title-container"
@@ -314,16 +350,17 @@ const App: React.FC = () => {
             </div>
           </ParallaxLayer>
           <ParallaxLayer
+        
             offset={2}
-            speed={-0.4}
+            speed={-0.25}
             className="page-title-flexbox"
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-              padding: "60px",
             }}
+            id="layer-3-front"
           >
             <div
               style={{
@@ -333,54 +370,51 @@ const App: React.FC = () => {
                 height: "100%",
               }}
             >
-              <Title style={strongTitleStyle}>我們的宗旨及願景</Title>
+              <Title className="dark-typography" style={strongTitleStyle}>
+                我們的宗旨及願景
+              </Title>
               <div
                 className="grow"
                 style={{ display: "flex", alignItems: "center" }}
               >
                 <div style={{ width: "100%" }}>
-                  <List
-                    className="light-text"
-                    style={{ margin: "0 15px" }}
-                    itemLayout="horizontal"
-                    dataSource={data}
-                    renderItem={(item: {
-                      icon: string;
-                      title: string;
-                      text: string;
-                    }) => (
-                      <List.Item>
-                        <List.Item.Meta
-                          style={{
-                            alignItems: "center" as const,
-                          }}
-                          avatar={
-                            <Avatar
-                              className="paragraph"
-                              src={item.icon}
-                              alt={item.title}
-                            />
-                          }
-                          title={
-                            <div
-                              style={{ fontSize: "26px" }}
-                              className="paragraph"
-                            >
-                              {item.title}
-                            </div>
-                          }
-                          description={
-                            <span
-                              style={{ fontSize: "16px" }}
-                              className="paragraph"
-                            >
-                              {item.text}
-                            </span>
-                          }
-                        />
-                      </List.Item>
-                    )}
-                  />
+                  <Fade right cascade>
+                    <List
+                      style={{ margin: "0 15px" }}
+                      itemLayout="horizontal"
+                      dataSource={data}
+                      renderItem={(item: {
+                        icon: string;
+                        title: string;
+                        text: string;
+                      }) => (
+                        <List.Item>
+                          <List.Item.Meta
+                            style={{
+                              alignItems: "center" as const,
+                            }}
+                            avatar={
+                              <Avatar
+                                className="paragraph"
+                                src={item.icon}
+                                alt={item.title}
+                              />
+                            }
+                            title={
+                              <div className="paragraph l2font1">
+                                {item.title}
+                              </div>
+                            }
+                            description={
+                              <span className="paragraph l2font2">
+                                {item.text}
+                              </span>
+                            }
+                          />
+                        </List.Item>
+                      )}
+                    />
+                  </Fade>
                 </div>
               </div>
             </div>
@@ -390,6 +424,7 @@ const App: React.FC = () => {
             offset={3}
             speed={0.02}
             style={{ backgroundColor: "#1f1e33", zIndex: 10 }}
+            id="layer-4"
           ></ParallaxLayer>
 
           <ParallaxLayer
@@ -402,6 +437,7 @@ const App: React.FC = () => {
               backgroundColor: "#1f1e33",
               color: "white",
             }}
+            id="layer-5-back"
           >
             <div
               className="page-title-container"
@@ -439,21 +475,82 @@ const App: React.FC = () => {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
+              width: "100%",
+              padding: "60px",
             }}
+            id="layer-5-front"
           >
-            <Fade bottom={true}>
-              <Typography className="dark-typography">
-                <Title>活動</Title>
-              </Typography>
-            </Fade>
+            <div style={{ ...sectionContainerStyles, width: "100%" }}>
+              <Title className="dark-typography" style={strongTitleStyle}>
+                活動及福利
+              </Title>
+              <Slider {...settings}>
+                <div
+                  className="flexbox-sect"
+                  style={{ flexGrow: 1, width: "100%" }}
+                >
+                  <div
+                    className="text"
+                    style={{
+                      ...bodyTextStyle,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: "calc(100% - 2em)",
+                      width: "calc(100% - 2em)",
+                      color: "blackx",
+                    }}
+                  >
+                    <Title
+                      className="dark-typography"
+                      style={strongTitleStyle}
+                      level={2}
+                    >
+                      校內活動
+                    </Title>{" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row" as const,
+                        width: "100%",
+                        maxHeight: "100%",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <Space size={[8, 16]} wrap className="grow">
+                        {events.map(({ image, title, description }) => {
+                          return (
+                            <div className="evt-card">
+                              <div className="meta">
+                                <div
+                                  className="photo"
+                                  style={{
+                                    backgroundImage: `url(${image})`,
+                                  }}
+                                ></div>
+                              </div>
+                              <div className="description">
+                                <h1>{title}</h1>
+                                <h2>{description}</h2>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </Space>
+                    </div>
+                  </div>
+                </div>
+              </Slider>
+            </div>
           </ParallaxLayer>
 
           <ParallaxLayer
             offset={5}
             speed={0.02}
             style={{ backgroundColor: "#1f1e33", zIndex: 10, padding: "60px" }}
+            id="layer-6"
           >
             <div
+              className="dark-typography"
               style={{
                 display: "flex" as const,
                 flexDirection: "column" as const,
@@ -490,6 +587,7 @@ const App: React.FC = () => {
             offset={6}
             speed={0.02}
             style={{ backgroundColor: "#1f1e33", zIndex: 10 }}
+            id="layer-7"
           >
             <div
               className="footer-container"
@@ -514,7 +612,7 @@ const App: React.FC = () => {
                   textAlign: "center",
                 }}
               >
-                <Title level={1}>
+                <Title className="dark-typography" level={1}>
                   <Row
                     align="middle"
                     style={{
