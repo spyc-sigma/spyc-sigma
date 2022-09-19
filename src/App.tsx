@@ -141,14 +141,22 @@ const App: React.FC = () => {
       description: "包括: 籃球、足球、排球等",
     },
     {
-      image: "./camera-to-be-changed.jpg",
+      image: "./photography.jpg",
       title: "校園攝影比賽",
       description: "透過攝影發掘出校園另一面",
     },
+  ];
+
+  const services = [
     {
-      image: "./camera-to-be-changed.jpg",
-      title: "校園攝影比賽",
-      description: "透過攝影發掘出校園另一面",
+      image: "./ping-pong.jpg",
+      title: "球類用品借用服務",
+      description: "我們將購入一定數量的體育用品供同學借用",
+    },
+    {
+      image: "./stationery.jpg",
+      title: "文儀用品售賣服務",
+      description: "我們將提供文具、單行紙、方格紙等的售賣服務",
     },
   ];
 
@@ -304,7 +312,18 @@ const App: React.FC = () => {
                     src="android-chrome-512x512.png"
                     alt="團結"
                   />
-                  <div className="text bodytext">徽號簡介待完成</div>
+                  <div className="text bodytext">
+                    我們的徽號主要的部分是Sigma符號,
+                    而左側的右箭頭象徵著我們三位成員希望並願意在學生會中擔任「
+                    <span style={strongTextStyle}>向前推進</span>」的角色,{" "}
+                    <span style={strongTextStyle}>推動</span>
+                    學生會的運作，同時提升學生會的
+                    <span style={strongTextStyle}>辦事效率</span>
+                    。徽號中作強調的顏色為綠色，象徵的是代表培英的「
+                    <span style={strongTextStyle}>白綠</span>
+                    」，代表著我們希望能
+                    <span style={strongTextStyle}>團結沙培的學生</span>。
+                  </div>
                 </div>
               </Slider>
             </div>
@@ -350,7 +369,6 @@ const App: React.FC = () => {
             </div>
           </ParallaxLayer>
           <ParallaxLayer
-        
             offset={2}
             speed={-0.25}
             className="page-title-flexbox"
@@ -424,8 +442,85 @@ const App: React.FC = () => {
             offset={3}
             speed={0.02}
             style={{ backgroundColor: "#1f1e33", zIndex: 10 }}
-            id="layer-4"
+            id="layer-4-back"
           ></ParallaxLayer>
+
+          <ParallaxLayer
+            offset={3}
+            speed={0.4}
+            className="page-title-flexbox"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              width: "100%",
+              zIndex: 11,
+            }}
+            id="layer-4-front"
+          >
+            <div style={{ ...sectionContainerStyles, width: "100%" }}>
+              <Title className="dark-typography" style={strongTitleStyle}>
+                提供服務
+              </Title>
+              <div style={{ flexGrow: 1, minHeight: 0 }} className="card-list">
+                <div
+                  className="flexbox-sect"
+                  style={{ flexGrow: 1, width: "100%" }}
+                >
+                  <div
+                    className="text"
+                    style={{
+                      ...bodyTextStyle,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: "calc(100% - 2em)",
+                      width: "calc(100% - 2em)",
+                      color: "blackx",
+                    }}
+                  >
+                    <Title
+                      className="dark-typography"
+                      style={strongTitleStyle}
+                      level={2}
+                    >
+                      校內服務
+                    </Title>{" "}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row" as const,
+                        width: "100%",
+                        maxHeight: "100%",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <Space size={[8, 16]} wrap className="grow">
+                        {services.map(({ image, title, description }) => {
+                          return (
+                            <div className="evt-card">
+                              <div className="meta">
+                                <div
+                                  className="photo"
+                                  style={{
+                                    backgroundImage: `url(${image})`,
+                                  }}
+                                ></div>
+                              </div>
+                              <div className="description">
+                                <h1>{title}</h1>
+                                <h2>{description}</h2>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </Space>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ParallaxLayer>
 
           <ParallaxLayer
             offset={4}
@@ -476,7 +571,6 @@ const App: React.FC = () => {
               alignItems: "center",
               flexDirection: "column",
               width: "100%",
-              padding: "60px",
             }}
             id="layer-5-front"
           >
@@ -484,7 +578,7 @@ const App: React.FC = () => {
               <Title className="dark-typography" style={strongTitleStyle}>
                 活動及福利
               </Title>
-              <Slider {...settings}>
+              <div style={{ flexGrow: 1, minHeight: 0 }} className="card-list">
                 <div
                   className="flexbox-sect"
                   style={{ flexGrow: 1, width: "100%" }}
@@ -539,7 +633,7 @@ const App: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </Slider>
+              </div>
             </div>
           </ParallaxLayer>
 
@@ -575,9 +669,20 @@ const App: React.FC = () => {
                   className="official-photo"
                 ></img>
                 <Typography className="light-text" style={{ margin: "0 auto" }}>
-                  <Paragraph className="paragraph" style={bodyTextStyle}>
-                    我打算呢度打d關於我地既野...有無idea
-                  </Paragraph>
+                  <Title
+                    level={2}
+                    className="paragraph"
+                    style={{ ...strongTitleStyle, lineHeight: 1.6 }}
+                  >
+                    (左側起)
+                    <br />
+                    4D <span style={strongTextStyle}>邵子熙</span>
+                    <br />
+                    4D <span style={strongTextStyle}>馬正清</span>
+                    <br />
+                    4D <span style={strongTextStyle}>伍子陽</span>
+                    <br />
+                  </Title>
                 </Typography>
               </div>
             </div>
@@ -607,6 +712,7 @@ const App: React.FC = () => {
                 className="grow"
                 style={{
                   display: "flex",
+                  flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
                   textAlign: "center",
@@ -638,6 +744,19 @@ const App: React.FC = () => {
                     </Col>
                   </Row>
                 </Title>
+                <Row
+                  align="middle"
+                  style={{
+                    textAlign: "center",
+                    justifyContent: "center",
+                    fontSize: "22px",
+                  }}
+                >
+                  <Col style={{ color: "rgba(255,255,255,0.6)" }}>投票日:</Col>
+                  <Col>
+                    <span style={strongTextStyle}>10月18日</span>
+                  </Col>
+                </Row>
               </div>
               <Row align="middle" gutter={16}>
                 <Col
