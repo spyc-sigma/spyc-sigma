@@ -19,6 +19,7 @@ import Fade from "react-reveal/Fade";
 import Slider from "react-slick";
 import "./App.css";
 import DescriptionSectionAnimation1 from "./components/desc-anim";
+import CardList from "./components/cardlist";
 const { Title, Paragraph, Link, Text } = Typography;
 const { Header, Content } = Layout;
 
@@ -57,6 +58,65 @@ const sectionContainerStyles = {
 };
 
 const nowrap = { whiteSpace: "nowrap" as const };
+
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+
+function preventDefault(e: Event) {
+  e.preventDefault();
+}
+
+function preventDefaultForScrollKeys(e: KeyboardEvent) {
+  if (keys[e.keyCode as keyof typeof keys]) {
+    preventDefault(e);
+    return false;
+  }
+}
+
+// modern Chrome requires { passive: false } when adding event
+var supportsPassive = false;
+try {
+  // @ts-ignore
+  window.addEventListener(
+    "test",
+    null,
+    Object.defineProperty({}, "passive", {
+      // eslint-disable-next-line getter-return
+      get: function () {
+        supportsPassive = true;
+      },
+    })
+  );
+} catch (e) {}
+
+var wheelOpt = supportsPassive ? { passive: false } : false;
+var wheelEvent =
+  "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
+
+// call this to Disable
+function disableScroll(element: HTMLElement) {
+  element.addEventListener("DOMMouseScroll", preventDefault, false); // older FF
+  element.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+  element.addEventListener("touchmove", preventDefault, wheelOpt); // mobile
+  element.addEventListener("keydown", preventDefaultForScrollKeys, false);
+}
+
+// call this to Enable
+function enableScroll(element: HTMLElement) {
+  element.removeEventListener("DOMMouseScroll", preventDefault, false);
+  element.removeEventListener(
+    wheelEvent,
+    preventDefault,
+    wheelOpt as boolean | EventListenerOptions
+  );
+  element.removeEventListener(
+    "touchmove",
+    preventDefault,
+    wheelOpt as boolean | EventListenerOptions
+  );
+  element.removeEventListener("keydown", preventDefaultForScrollKeys, false);
+}
 
 const App: React.FC = () => {
   const [currentSection, setCurrentSection] = useState("");
@@ -486,36 +546,7 @@ const App: React.FC = () => {
                     >
                       校內服務
                     </Title>{" "}
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row" as const,
-                        width: "100%",
-                        maxHeight: "100%",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <Space size={[8, 16]} wrap className="grow">
-                        {services.map(({ image, title, description }) => {
-                          return (
-                            <div className="evt-card">
-                              <div className="meta">
-                                <div
-                                  className="photo"
-                                  style={{
-                                    backgroundImage: `url(${image})`,
-                                  }}
-                                ></div>
-                              </div>
-                              <div className="description">
-                                <h1>{title}</h1>
-                                <h2>{description}</h2>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </Space>
-                    </div>
+                    <CardList items={services}></CardList>
                   </div>
                 </div>
               </div>
@@ -575,7 +606,11 @@ const App: React.FC = () => {
             id="layer-5-front"
           >
             <div style={{ ...sectionContainerStyles, width: "100%" }}>
-              <Title className="dark-typography" style={strongTitleStyle}>
+              <Title
+                className="dark-typography"
+                style={strongTitleStyle}
+                id="l5-title"
+              >
                 活動及福利
               </Title>
               <div style={{ flexGrow: 1, minHeight: 0 }} className="card-list">
@@ -595,42 +630,14 @@ const App: React.FC = () => {
                     }}
                   >
                     <Title
+                      id="l4-title"
                       className="dark-typography"
                       style={strongTitleStyle}
                       level={2}
                     >
                       校內活動
                     </Title>{" "}
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row" as const,
-                        width: "100%",
-                        maxHeight: "100%",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <Space size={[8, 16]} wrap className="grow">
-                        {events.map(({ image, title, description }) => {
-                          return (
-                            <div className="evt-card">
-                              <div className="meta">
-                                <div
-                                  className="photo"
-                                  style={{
-                                    backgroundImage: `url(${image})`,
-                                  }}
-                                ></div>
-                              </div>
-                              <div className="description">
-                                <h1>{title}</h1>
-                                <h2>{description}</h2>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </Space>
-                    </div>
+                    <CardList items={events}></CardList>
                   </div>
                 </div>
               </div>
@@ -764,14 +771,18 @@ const App: React.FC = () => {
                   flex="1 0 fit-content"
                   span={3}
                 >
-                  <Avatar icon={<InstagramOutlined />}></Avatar>
+                  <a href="https://www.instagram.com/spyc.sigma/">
+                    <Avatar icon={<InstagramOutlined />}></Avatar>
+                  </a>
                 </Col>
                 <Col
                   style={{ minWidth: "fit-content" }}
                   flex="1 0 fit-content"
                   span={3}
                 >
-                  <Avatar icon={<MailOutlined />}></Avatar>
+                  <a href="mailto:spyc-sigma@gmail.com">
+                    <Avatar icon={<MailOutlined />}></Avatar>
+                  </a>
                 </Col>
               </Row>
               <Divider
@@ -795,7 +806,7 @@ const App: React.FC = () => {
                         <Col>如有任何意見或疑問&nbsp;</Col>
                         <Col>歡迎透過電郵、Instagram Direct或</Col>
                         <Col>
-                          &nbsp;<Link href="#">意見收集箱</Link>&nbsp;聯絡我們
+                          &nbsp;<a rel="noreferrer" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSf1pxxT3R1CkLAALf8HBmEOjORi9sQfHy9BpdWu3IafREpUVA/viewform?usp=sf_link">意見收集箱</a>&nbsp;聯絡我們
                         </Col>
                       </Row>
                     </Paragraph>
