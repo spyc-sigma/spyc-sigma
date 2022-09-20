@@ -198,13 +198,23 @@ const App: React.FC = () => {
     {
       image: "./basketball-field.jpg",
       title: "師生球類比賽",
-      description: "包括: 籃球、足球、排球等",
+      description: "包括: 籃球、足球、排球等，同學可邀請老師一同組隊參賽",
     },
     {
       image: "./photography.jpg",
       title: "校園攝影比賽",
       description: "透過攝影發掘出校園另一面",
     },
+    {
+      image: "./posters.jpg",
+      title: "海報設計比賽",
+      description: "本年度為本校四十五周年，我們希望以此為主題舉辦海報設計比賽"
+    },
+    {
+      image: "chess.jpg",
+      title: "棋類比賽",
+      description: "相信不少同學都熱衷於象棋、圍棋等棋類活動。我們計畫舉辦棋類比賽，讓同學切磋棋藝！"
+    }
   ];
 
   const services = [
@@ -218,6 +228,31 @@ const App: React.FC = () => {
       title: "文儀用品售賣服務",
       description: "我們將提供文具、單行紙、方格紙等的售賣服務",
     },
+    {
+      image: "./umbrella.jpg",
+      title: "雨傘借用服務",
+      description: "我們將在下雨時提供雨傘供忘記攜帶雨傘的同學外借"
+    },
+    {
+      image: "./cold.jpg",
+      title: "暖包售賣服務",
+      description: "冬天時，我們將提供暖包售賣服務，讓同學可以保持溫暖"
+    },
+    {
+      image: "bag.jpg",
+      title: "借用環保袋",
+      description: "清理抽屜/儲物櫃時發現書包太小？我們將提供少量環保袋供同學外借"
+    },
+    {
+      image:"socks.jpg",
+      title:"襪子售賣服務",
+      description:"同學的襪子易於被暴雨打濕，我們將提供乾淨全新的白襪讓同學購買。"
+    },
+    {
+      image:"textbooks.jpg",
+      title:"二手書售賣平台",
+      description: "一如既往，我們計畫提供二手書售賣平台，方便同學購買或售賣二手書"
+    }
   ];
 
   return (
