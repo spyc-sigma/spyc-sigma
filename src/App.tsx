@@ -173,22 +173,22 @@ const App: React.FC = () => {
 
   const data = [
     {
-      icon: "flexed-biceps_1f4aa.png",
+      icon: "IMG_8605.png",
       title: "團結一致，為各同學服務",
       text: "集合同學的意見、理解同學的想法，並集合學生會各幹事的力量盡力為同學服務",
     },
     {
-      icon: "ear_1f442.png",
+      icon: "IMG_8606.png",
       title: "聆聽意見，豐富校園生活",
       text: "聆聽同學的意見，改善及豐富同學的校園生活，讓學校環境變得舒心",
     },
     {
-      icon: "glasses_1f453.png",
+      icon: "IMG_8607.png",
       title: "多元活動，拓展學生視野",
       text: "透過多元化活動協助學生擴展視野，並藉此提供機會讓同學展露各方面的才華，同時提升同學的團結精神",
     },
     {
-      icon: "heavy-dollar-sign_1f4b2.png",
+      icon: "IMG_8608.png",
       title: "爭取福利，提供店鋪優惠",
       text: "我們將走入店鋪，為同學儘量爭取各校外的福利，同時提供校內的便利服務",
     },
