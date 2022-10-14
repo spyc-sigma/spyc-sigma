@@ -28,7 +28,7 @@
   <script>
     // if url param contains target=gform redirect user to https://forms.gle/egFx7Ez2gm3F1dQYA
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('redirect') === 'gform' || urlParams.get("r" === "gform")) {  
+    if (urlParams.get('redirect') === 'gform' || urlParams.get("r") === "gform") {
       window.location.href = 'https://forms.gle/egFx7Ez2gm3F1dQYA';
     }
   </script>
